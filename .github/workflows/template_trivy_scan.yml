@@ -15,7 +15,7 @@ jobs:
     
     steps:
       - run: echo ${{ github.workspace }}
-      - run: ls
+      - run: ls -la
       - run: pwd
       # Run Trivy Scan 
       - name: Run Trivy vulnerability scanner in repo mode
