@@ -30,4 +30,4 @@ jobs:
   call-trivy-scan:
     uses: ./.github/workflows/template_trivy_scan.yml
     with:
-      sourcePath: './src'
+      sourcePath: '.'
