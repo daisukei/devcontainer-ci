@@ -23,7 +23,7 @@ jobs:
         with:
 
           scan-type: 'fs'
-          scan-ref: '/home/runner/work/devcontainer-ci/devcontainer-ci'
+          scan-ref: '.'
           ignore-unfixed: true
           format: 'sarif'
           output: 'trivy-results.sarif'
