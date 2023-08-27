@@ -26,30 +26,8 @@ jobs:
         with:
           imageName: ghcr.io/daisukei/example-devcontainer
           runCmd: pytest
-
-      # Run Trivy Scan 
-      - name: Run Trivy vulnerability scanner in repo mode
-        uses: aquasecurity/trivy-action@master
-        with:
-          scan-type: 'fs'
-          ignore-unfixed: true
-          format: 'sarif'
-          output: 'trivy-results.sarif'
-          severity: 'CRITICAL,HIGH'
-
-      #- name: Upload Trivy scan results to GitHub Security tab
-      #  uses: github/codeql-action/upload-sarif@v2
-      #  with:
-      #    sarif_file: 'trivy-results.sarif'
-
-      - name: Upload Trivy scan result
-        uses: actions/upload-artifact@v3
-        with:
-          name: trivy scan result
-          path: trivy-results.sarif
-    
-      - name: trivy alert
-        run: |
-          if grep -e CRITICAL -e HIGH trivy-results.sarif; then
-            exit 1
-          fi
+      
+  call-trivy-scan:
+    uses: ./.github/workflows/template_trivy_scan.yml
+    with:
+      sourcePath: './src'
