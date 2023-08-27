@@ -19,7 +19,7 @@ jobs:
         uses: aquasecurity/trivy-action@master
         with:
           scan-type: 'fs'
-          path: sourcePath
+          entryPoint: sourcePath
           ignore-unfixed: true
           format: 'sarif'
           output: 'trivy-results.sarif'
