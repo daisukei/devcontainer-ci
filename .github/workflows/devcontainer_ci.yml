@@ -31,7 +31,7 @@ jobs:
           #runCmd: sudo chmod 644 . || echo "Hello, World!" > sample.txt
       - name: Display runCmdOutput
         run: |
-          echo "'runCmdOutput' value: $runCmdOutput"
+          echo 'runCmdOutput' value: ${{ env.runCmdOutput }}
 
       - name: List all files and folders
         run: ls -alh
