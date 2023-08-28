@@ -29,9 +29,10 @@ jobs:
           subFolder: '.'
           runCmd: sudo chmod 777 . || pytest --doctest-modules --junitxml=junit/test-results.xml --cov=./devcontainer-ci --cov-report=xml --cov-report=html || pwd || ls -alh
           #runCmd: sudo chmod 644 . || echo "Hello, World!" > sample.txt
+          
       - name: Display runCmdOutput
         run: |
-          echo 'runCmdOutput' value: ${{ env.runCmdOutput }}
+          echo "The result was:: ${{ steps.simpletest.outputs.runCmdOutput }}"
 
       - name: List all files and folders
         run: ls -alh
