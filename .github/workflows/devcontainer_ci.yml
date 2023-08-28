@@ -26,9 +26,8 @@ jobs:
         with:
           imageName: ghcr.io/daisukei/example-devcontainer
           subFolder: '.'
-          runCmd: pwd
 #          runCmd: chmod 644 . || pytest --doctest-modules --junitxml=junit/test-results-${{ matrix.python-version }}.xml --cov=./devcontainer-ci --cov-report=xml --cov-report=html
-#          runCmd: chmod 644 . || echo "Hello, World!" > sample.txt
+          runCmd: chmod 644 . || echo "Hello, World!" > sample.txt
 
       # テスト結果の表示
       - name: Upload pytest test results
