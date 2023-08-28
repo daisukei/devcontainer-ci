@@ -29,7 +29,9 @@ jobs:
           runCmd: sudo chmod 777 . || pytest --doctest-modules --junitxml=junit/test-results-${{ matrix.python-version }}.xml --cov=./devcontainer-ci --cov-report=xml --cov-report=html
           #runCmd: sudo chmod 644 . || echo "Hello, World!" > sample.txt
 
-      # テスト結果の表示
+      - name: List all files and folders
+        run: ls -alh
+
       - name: Upload pytest test results
         uses: actions/upload-artifact@v3
         with:
