@@ -31,14 +31,14 @@ jobs:
 #          runCmd: sudo chmod 777 . || pytest --doctest-modules --junitxml=junit/test-results.xml --cov=./devcontainer-ci --cov-report=xml --cov-report=html || pwd || ls -alh
           #runCmd: sudo chmod 644 . || echo "Hello, World!" > sample.
 
+      - name: runner - List all files and folders
+        run: ls -alh 
+
       - name: Install Devcontainer CLI
         run: |
           npm install -g @devcontainers/cli
           devcontainer --version
           printenv
-
-      - name: List all files and folders- /workspaces/devcontainer-ci/env/
-        run: ls -l /workspaces/devcontainer-ci/env/
 
       - name: Start Devcontainer
         run: |
@@ -49,8 +49,6 @@ jobs:
         run: devcontainer exec --workspace-folder ./env pytest ./src/tests --doctest-modules --junitxml=junit/test-results-${{ matrix.python-version }}.xml --cov=. --cov-report=xml --cov-report=html
 
 
-      - name: runner - List all files and folders
-        run: ls -alh /home/runner/work/devcontainer-ci/devcontainer-ci
 
 #      - name: mnt/output - List all files and folders
 #        run: ls -alh /mnt/github/output
