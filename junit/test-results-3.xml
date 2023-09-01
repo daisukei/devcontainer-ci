@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="3" time="0.101" timestamp="2023-08-28T03:07:22.931267" hostname="d5fd0cf416c1"><testcase classname="src.tests.test_main" name="test_greet" time="0.001" /><testcase classname="src.tests.test_main" name="test_agecheck" time="0.001" /><testcase classname="src.tests.test_main" name="test_agecheck_fail" time="0.001"><failure message="AssertionError: assert 'You are underage.' == 'This is mistake.'&#10;  - This is mistake.&#10;  + You are underage.">def test_agecheck_fail():
-&gt;       assert agecheck(17) == "This is mistake."
-E       AssertionError: assert 'You are underage.' == 'This is mistake.'
-E         - This is mistake.
-E         + You are underage.
-
-src/tests/test_main.py:14: AssertionError</failure></testcase></testsuite></testsuites>
