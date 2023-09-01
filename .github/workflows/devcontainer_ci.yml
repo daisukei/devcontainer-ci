@@ -44,12 +44,13 @@ jobs:
           devcontainer --version
           printenv
 
-      - name: Start Devcontainer
+      - name: Build and push Devcontainer Image
         run: |
           devcontainer build --workspace-folder ./env --push true --image-name ghcr.io/daisukei/example-devcontainer-image
-          devcontainer up --workspace-folder ./env
       - name: Run Pytest in Devcontainer
-        run: devcontainer exec --workspace-folder ./env pytest ../src/tests --doctest-modules --junitxml=junit/test-results.xml --cov=../src --cov-report=xml --cov-report=html
+        run: |
+          devcontainer up --workspace-folder ./env
+          devcontainer exec --workspace-folder ./env pytest ../src/tests --doctest-modules --junitxml=junit/test-results.xml --cov=../src --cov-report=xml --cov-report=html
 
       - name: runner - List all files and folders
         run: |
