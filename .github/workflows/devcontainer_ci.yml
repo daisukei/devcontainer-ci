@@ -47,8 +47,8 @@ jobs:
       - name: runner - List all files and folders
         run: ls -alh /home/runner/work/devcontainer-ci/devcontainer-ci
 
-      - name: mnt/output - List all files and folders
-        run: ls -alh /mnt/github/output
+#      - name: mnt/output - List all files and folders
+#        run: ls -alh /mnt/github/output
         
       - name: Upload pytest test results
         uses: actions/upload-artifact@v3
