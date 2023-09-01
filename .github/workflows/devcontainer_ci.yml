@@ -21,18 +21,25 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GH_PAT }}
 
-      - name: Build and run dev container task
-        uses: devcontainers/ci@v0.3
-        id: simpletest
-        with:
-          imageName: ghcr.io/daisukei/example-devcontainer
-          subFolder: '.'
-          runCmd: sudo chmod 777 . || pytest --doctest-modules --junitxml=junit/test-results.xml --cov=./devcontainer-ci --cov-report=xml --cov-report=html || pwd || ls -alh
-          #runCmd: sudo chmod 644 . || echo "Hello, World!" > sample.txt
-          
-      - name: Display runCmdOutput
+
+#      - name: Build and run dev container task
+#        uses: devcontainers/ci@v0.3
+#        id: simpletest
+#        with:
+#          imageName: ghcr.io/daisukei/example-devcontainer
+#          subFolder: '.'
+#          runCmd: sudo chmod 777 . || pytest --doctest-modules --junitxml=junit/test-results.xml --cov=./devcontainer-ci --cov-report=xml --cov-report=html || pwd || ls -alh
+          #runCmd: sudo chmod 644 . || echo "Hello, World!" > sample.
+
+      - name: Install Devcontainer CLI
         run: |
-          echo "The result was:: ${{ steps.simpletest.outputs.runCmdOutput }}"
+          npm install -g @devcontainers/cli
+          devcontainer --version
+          printenv
+      - name: Start Devcontainer
+        run: |
+          devcontainer build --workspace-folder . --push true --image-name ghcr.io/daisukei/example-devcontainer-image
+          devcontainer up --workspace-folder .
 
       - name: List all files and folders
         run: ls -alh
