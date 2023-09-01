@@ -46,7 +46,7 @@ jobs:
 
       - name: Build and push Devcontainer Image
         run: |
-          devcontainer build --workspace-folder ./env
+          devcontainer build --workspace-folder ./env --image-name example-devcontainer-image
           ls -alh 
      # devcontainer build --workspace-folder ./env --push true --image-name ghcr.io/daisukei/example-devcontainer-image
 
