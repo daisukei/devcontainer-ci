@@ -14,14 +14,6 @@ jobs:
       - name: Checkout (GitHub)
         uses: actions/checkout@v3
 
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2 
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GH_PAT }}
-
-
 #      - name: Build and run dev container task
 #        uses: devcontainers/ci@v0.3
 #        id: simpletest
@@ -44,12 +36,6 @@ jobs:
           devcontainer --version
           printenv
 
-      - name: Build and push Devcontainer Image
-        run: |
-          devcontainer build --workspace-folder ./env --image-name example-devcontainer-image
-          ls -alh 
-     # devcontainer build --workspace-folder ./env --push true --image-name ghcr.io/daisukei/example-devcontainer-image
-
       - name: Run Pytest in Devcontainer
         run: |
           devcontainer up --workspace-folder ./env
@@ -71,7 +57,25 @@ jobs:
         # Use always() to always run this step to publish test results when there are test failures
         if: ${{ always() }}
 
-  call-trivy-scan:
-    uses: ./.github/workflows/template_trivy_scan.yml
-    with:
-      sourcePath: '.'
+
+#      - name: Login to GitHub Container Registry
+#        uses: docker/login-action@v2 
+ #       with:
+ #         registry: ghcr.io
+ #         username: ${{ github.actor }}
+ #         password: ${{ secrets.GH_PAT }}
+
+      - name: Log in to GitHub Packages Docker registry
+        run: docker login ghcr.io -u ${{ github.actor }} --password ${{ secrets.GH_PAT }}
+
+      - name: Build and push Devcontainer Image
+        run: |
+          devcontainer build --workspace-folder ./env --image-name daisukei-devcontainer-image:1.0
+          ls -alh 
+     # devcontainer build --workspace-folder ./env --push true --image-name ghcr.io/daisukei/example-devcontainer-image
+
+      - name: Tag Docker image
+        run: docker tag "daisukei-devcontainer-image:1.0" "ghcr.io/daisukei/daisukei-devcontainer-image:1.0"
+  
+      - name: Push Docker image to GitHub Packages
+        run: docker push "ghcr.io/daisukei/daisukei-devcontainer-image:1.0"
