@@ -32,7 +32,9 @@ jobs:
           #runCmd: sudo chmod 644 . || echo "Hello, World!" > sample.
 
       - name: runner - List all files and folders
-        run: ls -alh 
+        run: |
+          sudo chmod g+w ./env
+          ls -alh 
 
       - name: Install Devcontainer CLI
         run: |
