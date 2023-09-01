@@ -40,9 +40,12 @@ jobs:
         run: |
           devcontainer build --workspace-folder ./env --push true --image-name ghcr.io/daisukei/example-devcontainer-image
           devcontainer up --workspace-folder ./env
+            #    - name: Run Pytest in Devcontainer
+      - name: Run Pytest in Devcontainer
+        run: devcontainer exec --workspace-folder ${{ inputs.workspaceFolder }} pytest ./src/ship_detector/tests --doctest-modules --junitxml=junit/test-results-${{ matrix.python-version }}.xml --cov=. --cov-report=xml --cov-report=html
 
       - name: List all files and folders
-        run: ls -alh
+        run: ls -alh ${{ inputs.workspaceFolder }} 
 
       - name: runner - List all files and folders
         run: ls -alh /home/runner/work/devcontainer-ci/devcontainer-ci
