@@ -36,6 +36,10 @@ jobs:
           npm install -g @devcontainers/cli
           devcontainer --version
           printenv
+
+      - name: List all files and folders- /workspaces/devcontainer-ci/env/
+        run: ls -l /workspaces/devcontainer-ci/env/
+
       - name: Start Devcontainer
         run: |
           devcontainer build --workspace-folder ./env --push true --image-name ghcr.io/daisukei/example-devcontainer-image
@@ -44,8 +48,6 @@ jobs:
       - name: Run Pytest in Devcontainer
         run: devcontainer exec --workspace-folder ./env pytest ./src/tests --doctest-modules --junitxml=junit/test-results-${{ matrix.python-version }}.xml --cov=. --cov-report=xml --cov-report=html
 
-      - name: List all files and folders
-        run: ls -alh ${{ inputs.workspaceFolder }} 
 
       - name: runner - List all files and folders
         run: ls -alh /home/runner/work/devcontainer-ci/devcontainer-ci
