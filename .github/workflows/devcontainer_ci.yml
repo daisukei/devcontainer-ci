@@ -34,6 +34,8 @@ jobs:
       - name: runner - List all files and folders
         run: |
           sudo chmod g+w ./env
+          mkdir .pytest_cache
+          chmod g+w .pytest_cache
           ls -alh 
 
       - name: Install Devcontainer CLI
