@@ -46,7 +46,10 @@ jobs:
 
       - name: Build and push Devcontainer Image
         run: |
-          devcontainer build --workspace-folder ./env --push true --image-name ghcr.io/daisukei/example-devcontainer-image
+          devcontainer build --workspace-folder ./env
+          ls -alh 
+     # devcontainer build --workspace-folder ./env --push true --image-name ghcr.io/daisukei/example-devcontainer-image
+
       - name: Run Pytest in Devcontainer
         run: |
           devcontainer up --workspace-folder ./env
