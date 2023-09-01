@@ -38,8 +38,8 @@ jobs:
           printenv
       - name: Start Devcontainer
         run: |
-          devcontainer build --workspace-folder . --push true --image-name ghcr.io/daisukei/example-devcontainer-image
-          devcontainer up --workspace-folder .
+          devcontainer build --workspace-folder ./env --push true --image-name ghcr.io/daisukei/example-devcontainer-image
+          devcontainer up --workspace-folder ./env
 
       - name: List all files and folders
         run: ls -alh
