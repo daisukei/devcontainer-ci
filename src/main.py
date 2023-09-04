@@ -13,5 +13,4 @@ if __name__ == '__main__':
     print("test")
     print(greet("Alice"))
     agecheck(18)
-    print("finish")
     
