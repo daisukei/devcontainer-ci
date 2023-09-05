@@ -65,11 +65,11 @@ jobs:
         # Use always() to always run this step to publish test results when there are test failures
         if: ${{ always() }}
 
-      - name: Get Cover 
-        uses: orgoro/coverage@v3.1
-        with:
-          coverageFile: ./env/coverage.xml
-          token: ${{ secrets.GH_PAT }}
+#      - name: Get Cover 
+#        uses: orgoro/coverage@v3.1
+#        with:
+#          coverageFile: ./env/coverage.xml
+#          token: ${{ secrets.GH_PAT }}
 
 #      - name: Login to GitHub Container Registry
 #        uses: docker/login-action@v2 
@@ -86,6 +86,25 @@ jobs:
           devcontainer build --workspace-folder ./env --image-name daisukei-devcontainer-image:1.0
           ls -alh 
      # devcontainer build --workspace-folder ./env --push true --image-name ghcr.io/daisukei/example-devcontainer-image
+
+      - name: Run Trivy vulnerability Image scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'daisukei-devcontainer-image:1.0'
+          format: 'sarif'
+          output: 'trivy-image-results.sarif'
+  
+      - name: Upload Trivy Image scan result
+        uses: actions/upload-artifact@v3
+        with:
+          name: trivy scan result
+          path: trivy-image-results.sarif
+
+      - name: Trivy Image Alert
+        run: |
+          if grep -e CRITICAL -e HIGH trivy-image-results.sarif; then
+            exit 1
+          fi
 
       - name: Tag Docker image
         run: docker tag "daisukei-devcontainer-image:1.0" "ghcr.io/daisukei/daisukei-devcontainer-image:1.0"
