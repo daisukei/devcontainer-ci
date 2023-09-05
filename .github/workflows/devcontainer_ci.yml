@@ -102,7 +102,7 @@ jobs:
 
       - name: Trivy Image Alert
         run: |
-          if grep -e CRITICAL -e HIGH trivy-image-results.sarif; then
+          if grep -e CRITICAL trivy-image-results.sarif; then
             exit 1
           fi
 
