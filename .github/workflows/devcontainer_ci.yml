@@ -92,6 +92,8 @@ jobs:
         with:
           image-ref: 'daisukei-devcontainer-image:1.0'
           format: 'sarif'
+          ignore-unfixed: true
+          vuln-type: 'os,library'          
           output: 'trivy-image-results.sarif'
   
       - name: Upload Trivy Image scan result
