@@ -5,11 +5,23 @@ on:
       - main
   workflow_dispatch:
 
+env:
+  CR_PAT: '${{ secrets.GH_PAT }}'
+  GHUsername: 'daisukei'
+  
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-
+      - name: Check Env Values
+        run: |
+            echo $CR_PAT 
+            echo $GHUsername
+            if [[ -z "$CR_PAT" ]] || [[ -z "$GHUsername" ]]; then
+              echo "CR_PAT or GHUsername is not set or empty. Exiting."
+              exit 1
+            fi
+            
       - name: Checkout (GitHub)
         uses: actions/checkout@v3
 
