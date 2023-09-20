@@ -7,7 +7,7 @@ on:
 
 env:
   CR_PAT: '${{ secrets.GH_PAT }}'
-  GHUsername: 'daisukei'
+  GHUsername:  '${{ secrets.NAITO_ACCOUNT }}'
   
 jobs:
   build:
