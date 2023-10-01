@@ -49,6 +49,7 @@ jobs:
 
       - name: Run Pytest in Devcontainer
         run: |
+          devcontainer build --workspace-folder ./env  
           devcontainer up --workspace-folder ./env
           devcontainer exec --workspace-folder ./env pytest ../src/tests --cov=../src -v --cov-report=xml --cov-report=html
         #devcontainer exec --workspace-folder ./env pytest ../src/tests --doctest-modules --junitxml=junit/test-results.xml --cov=../src --cov-report=xml --cov-report=html
