@@ -7,7 +7,7 @@ on:
 
 env:
   CR_PAT: '${{ secrets.GH_PAT }}'
-  GHUsername:  '${{ secrets.NAITO_ACCOUNT }}'
+  GHUsername:  '${{ vars.USERNAME }}'
   SPACESDK_VERSION: '0.5.0'
 
 jobs:
